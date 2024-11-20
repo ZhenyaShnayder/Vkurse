@@ -1,0 +1,37 @@
+form{
+	flex-direction: column;
+}
+input.text{
+	width:  95%;
+	height: 1%;
+	padding: 1% 1%;
+	margin: 1%;
+}
+.button{
+	background:#c9a78f;
+	width:  98%;
+	height: 1%;
+	padding: 1% 1%;
+	margin: 0.5%;
+}
+button:active {
+    background-color: #aa8469;
+}
+div{
+	border: 1px solid black;
+	background: white;
+	width: 40%;
+	height: 90%;
+	padding: 1% 1%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+body{
+	background-image: url("leopard.jpg");	
+	background-repeat: repeat;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
