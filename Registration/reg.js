@@ -1,3 +1,4 @@
-function authorization(){
-	<form method="GET" action="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email">
+function authorithation(event){
+	event.preventDefault();
+	window.location.href="http://10.10.151.174";
 }
