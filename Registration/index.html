@@ -8,17 +8,17 @@
 <body>
 	<div>
 		<h1>Регистрация</h1>
-		<form>
-			<input type="text" class="text" placeholder="Имя">
-			<input type="text" class="text" placeholder="Фамилия">
-			<input type="text" class="text" placeholder="Отчество">
-			<input type="text" class="text" placeholder="Корпоративная почта">
-			<input type="password" class="text" placeholder="Пароль">
-			<input type="password" class="text" placeholder="Повторите пароль">
+		<form method="POST"> 
+			<input type="text" class="text" placeholder="Имя" name="name">
+			<input type="text" class="text" placeholder="Фамилия" name="last_name">
+			<input type="text" class="text" placeholder="Отчество" name="middle_name">
+			<input type="text" class="text" placeholder="Корпоративная почта" name="email">
+			<input type="password" class="text" placeholder="Пароль" name="password">
+			<input type="password" class="text" placeholder="Повторите пароль" name="repeatpassword">
 			<button class="button">Зарегистрироваться</button>
-			<button class="button" onclick="authorithation(event)">Уже есть аккаунт? Войти</button>
-			<p>Заявка на регистрацию рассматривается в течение 3-х рабочих дней</p>
 		</form>
+		<button class="button" onclick="authorithation(event)">Уже есть аккаунт? Войти</button>
+		<p>Заявка на регистрацию рассматривается в течение 3-х рабочих дней</p>
 	</div>
 </body>
 </html>

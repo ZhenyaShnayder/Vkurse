@@ -1,0 +1,16 @@
+.outside{
+	top: 0;
+	left: 0;
+	background:#c9a78f;
+	width:  2.5%;
+	height: 1%;
+	padding: 1% 2%;
+	margin: 1%;
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+button:active {
+    background-color: #aa8469;
+}
