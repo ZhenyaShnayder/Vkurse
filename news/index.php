@@ -1,3 +1,9 @@
+<?php
+	if(!isset($_COOKIE["test_cookie"])){
+		header("Location: /");
+		exit;
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
