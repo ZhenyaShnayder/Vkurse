@@ -1,6 +1,76 @@
-<?php 
-	
-	header("Location: /news/");
-	setcookie("test_cookie", "12345678");
-?>
+<?php
+	$db = new mysqli('localhost', 'root', '', '?db_name'); // connect to database
+
+	if (!$db) {
+		echo "Connection to DB failed. Errno: $db->connect_errno\n"; 
+		exit();
+	}
+
+	$db->set_charset("utf8"); // set charset
+
+    //isset($_POST) ?
+
+	// construct SELECT person query
+	$query ="SELECT id, role, department FROM users WHERE email = '"+$_POST['email'] + "\' and password = \'" + $_POST['password']+"'";
+
+	echo "Select user query: $query \n"; //*
+
+	$result = $db->query($query); // send query
+
+	if (!$result){
+		echo "Select user query failed \n";
+		exit();
+	}
+
+	$user_info = $result->fetch_array(); // take first row
+	if($user_info == null){
+		echo "Nothing was found\n";
+		exit();
+	}
+
+	// check session existance
+	$query ="SELECT * FROM session WHERE id = '" +$user_info['id']+"'";
+	echo " Select session query: $query\n"; //*
+
+	$result = $db->query($query); // send query
+	if (!$result){
+		echo "Select session query failed\n";
+		exit();
+	}
+	$session_row = $result->fetch_array();
+
+	if ($session_row != null){
+		$query ="DELETE FROM session WHERE id = '" +$session_row['id']+"'";
+		echo "Delete session query: $query\n"; //*
+
+		$result = $db->query($query); // send query
+
+		if (!$result){
+			echo "Delete query failed \n";
+		exit();
+	}
+	}
+
+	// generate cookie
+	$cookie = hash('sha256', $user_info['email'] + date(DATE_RFC2822));
+	echo "New Cookie: $cookie\n
+	User email:", $user_info['email'], "\n
+	Date:", date(DATE_RFC2822), "\n";
+
+
+	// construct INSERT session query
+	$query = "INSERT INTO session VALUES('" + $user_info['id'] + ", '" + $cookie + "')";
+	echo "Insert session query: $query "; //*
+
+	$result = $db->query($query); // send query
+	if (!$result){
+		echo "Insert Query failed \n";
+		exit();
+	}
+
+	header("Location: \\news"); // redirrect
+	setcookie('session', $cookie); // set new cookie 
+
+	$db->close();
+>
 
