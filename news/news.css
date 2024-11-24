@@ -1,6 +1,5 @@
 .outside{
-	top: 0;
-	left: 0;
+	right: 0;
 	background:#c9a78f;
 	width:  2.5%;
 	height: 1%;
@@ -10,7 +9,26 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	border:black;
 }
 button:active {
-    background-color: #aa8469;
+	background-color: #aa8469;
+}
+pre{
+	font-size: 1.1rem;
+}
+.panel{
+	background-color: #aa8469;
+	padding: 1% 1%; 
+	display: flex;
+}
+.Name_out{
+	width:20%;
+	display: flex;
+	display:inline; 
+}
+h1{
+	top: 0;
+	left: 0;
+	width:  100%;
 }
