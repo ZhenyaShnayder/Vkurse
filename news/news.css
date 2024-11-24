@@ -20,7 +20,12 @@ pre{
 .panel{
 	background-color: #aa8469;
 	padding: 1% 1%; 
+	top:0;
 	display: flex;
+	width:100%;
+	position: fixed;
+
+
 }
 .Name_out{
 	width:20%;
@@ -31,4 +36,29 @@ h1{
 	top: 0;
 	left: 0;
 	width:  100%;
+}
+div.post{
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin: 1%;
+	margin-left:20%;
+	margin-right:20%;
+}
+article.post{
+	margin:0;
+	padding:0.3rem;
+	background-color:#EEE;
+}
+
+.title{
+	text-align: center;
+}
+h1{
+	text-align: center;
+}
+.body{
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }

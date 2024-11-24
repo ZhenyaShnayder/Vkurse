@@ -41,5 +41,20 @@
 				<pre>Ivan Aktanov</pre>
 			</div>
 		</div>
+		<article class="post">
+			<div class="post">
+				<pre class="title">author: Vanya</pre>
+				<h1 class="title">Title</h1>
+				<p>text</p>
+				<figure>
+					<img src= "/images/1.jpg">
+				</figure>
+				<form>
+					<input type="button">
+					<input type="button">
+					<input type="button" class="comments>
+				</form>
+			</div>
+		</article>
 	</body>
 </html>
