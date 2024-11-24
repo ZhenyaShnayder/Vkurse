@@ -1,8 +1,13 @@
 <?php
-	$db = new mysqli('localhost', 'root', '', '?db_name'); // connect to database
-
+	$db = new mysqli('127.0.0.1', 'root', '', 'vkurse_db'); // connect to database
+	
 	if (!$db) {
-		echo "Connection to DB failed. Errno: $db->connect_errno\n"; 
+		echo "<!DOCTYPE html>
+		<html>
+		<body>
+		<h1>Connection to DB failed. Errno:" . $db->connect_errno . "</h1>
+		</body>
+		</html>"; 
 		exit();
 	}
 
@@ -11,25 +16,27 @@
     //isset($_POST) ?
 
 	// construct SELECT person query
-	$query ="SELECT id, role, department FROM users WHERE email = '"+$_POST['email'] + "\' and password = \'" + $_POST['password']+"'";
-
-	echo "Select user query: $query \n"; //*
-
+	$query ="SELECT id, role, departament FROM users WHERE email = '" . $_POST['email'] . "' and password = '" . $_POST['password'] . "'";
+	//$query ="SELECT id, role, departament FROM users WHERE email = '" . '12' . "' and password = '" . '34' . "'";
+	
+	//echo "Select user query: $query" . "\n"; //*
+	
 	$result = $db->query($query); // send query
-
+	
 	if (!$result){
 		echo "Select user query failed \n";
 		exit();
 	}
-
+	
 	$user_info = $result->fetch_array(); // take first row
 	if($user_info == null){
-		echo "Nothing was found\n";
+		header("Location: /");
+		echo "User wasn't found\n";
 		exit();
 	}
 
 	// check session existance
-	$query ="SELECT * FROM session WHERE id = '" +$user_info['id']+"'";
+	$query ="SELECT * FROM session WHERE id = '" . $user_info['id'] . "'";
 	echo " Select session query: $query\n"; //*
 
 	$result = $db->query($query); // send query
@@ -40,26 +47,26 @@
 	$session_row = $result->fetch_array();
 
 	if ($session_row != null){
-		$query ="DELETE FROM session WHERE id = '" +$session_row['id']+"'";
-		echo "Delete session query: $query\n"; //*
+		$query ="DELETE FROM session WHERE id = '" . $session_row['id'] . "'";
+		// echo "Delete session query: $query\n"; //*
 
 		$result = $db->query($query); // send query
 
 		if (!$result){
 			echo "Delete query failed \n";
-		exit();
-	}
+			exit();
+		}
 	}
 
 	// generate cookie
-	$cookie = hash('sha256', $user_info['email'] + date(DATE_RFC2822));
+	$cookie = hash('sha256', $user_info['email'] . date(DATE_RFC2822));
 	echo "New Cookie: $cookie\n
 	User email:", $user_info['email'], "\n
 	Date:", date(DATE_RFC2822), "\n";
 
 
 	// construct INSERT session query
-	$query = "INSERT INTO session VALUES('" + $user_info['id'] + ", '" + $cookie + "')";
+	$query = "INSERT INTO session VALUES(" . $user_info['id'] . ", '" . $cookie . "')";
 	echo "Insert session query: $query "; //*
 
 	$result = $db->query($query); // send query
@@ -68,9 +75,8 @@
 		exit();
 	}
 
-	header("Location: \\news"); // redirrect
+	header("Location: /news/"); // redirrect
 	setcookie('session', $cookie); // set new cookie 
-
-	$db->close();
->
+	//$db->close();
+?>
 
