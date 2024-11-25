@@ -13,7 +13,10 @@
 
 	$db->set_charset("utf8"); // set charset
 
-    //isset($_POST) ?
+    	if(!isset($_POST['email']) || !isset($_POST['password'])){
+    		header("Location: /");
+    		exit();
+    	}
 
 	// construct SELECT person query
 	$query = "SELECT id, role, departament FROM users WHERE email = '" . $_POST['email'] . "' AND password = '" . $_POST['password'] . "';";
