@@ -18,12 +18,25 @@
 
 	$db->set_charset("utf8"); // set charset
 	
-	if ($db->query("SELECT * FROM session WHERE cookie='" . $_COOKIE["session"] . "';")->fetch_array() == null){
+	$user_id = $db->query("SELECT * FROM session WHERE cookie='" . $_COOKIE["session"] . "';")->fetch_array(); 
+	
+	if ($user_id == null){
 		header("Location: /");
 	}
 	
+	$user_id = $user_id['id'];
 	
+	$user_info = $db->query("SELECT * FROM users WHERE id=" . $user_id . ";")->fetch_array(); 
 	
+	$posts;
+	
+	if ($user_info['departament']=='admin'){
+		$posts = $db->query("SELECT * FROM posts");
+	} 
+	else 
+	{
+		$posts = $db->query("SELECT * FROM posts WHERE JSON_CONTAINS(departament, '[\"" . $user_info['departament'] . "\"]');"); 
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,27 +47,25 @@
 		<title>News</title>
 	</head>
 	<body>
-		<div class='panel'>
+		<header class='panel'>
 			<h1>Vkurse</h1>
 			<div class="Name_out">
+				<pre><?=$user_info['name']?> <?=$user_info['middle_name']?> <?=$user_info['surname']?></pre>
+				<?php
+					if($user_info['role'] == 'editor' || $user_info['role'] == 'admin'){
+						echo "<a class=\"post_for_editor\" href=\"\\Post\\\">New post</a>";
+					}
+				?>
 				<button class="outside" onclick="proverka();">Выйти</button>
-				<pre>Ivan Aktanov</pre>
 			</div>
-		</div>
-		<article class="post">
-			<div class="post">
-				<pre class="title">author: Vanya</pre>
-				<h1 class="title">Title</h1>
-				<p>text</p>
-				<figure>
-					<img src= "/images/1.jpg">
-				</figure>
-				<form>
-					<input type="button">
-					<input type="button">
-					<input type="button" class="comments>
-				</form>
-			</div>
-		</article>
+		</header>
+		<?php
+		while ($post = $posts->fetch_array()){
+			$post_autor = $db->query("SELECT * FROM users WHERE id=" . $post['id_user'] . ";")->fetch_array();
+			include 'post_templ.php';
+		}
+		?>
+
 	</body>
 </html>
+<?php $db->close(); ?>

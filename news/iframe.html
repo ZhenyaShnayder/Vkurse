@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="styles.css">
+	<script src="reg.js"></script>
+	<meta charset=utf-8>
+	<title>Регистрация</title>
+</head>
+<body>
+	<div>
+		<h1>Регистрация</h1>
+		<form method="POST"> 
+			<input type="text" class="text" placeholder="Имя" name="name">
+			<input type="text" class="text" placeholder="Фамилия" name="last_name">
+			<input type="text" class="text" placeholder="Отчество" name="middle_name">
+			<input type="text" class="text" placeholder="Корпоративная почта" name="email">
+			<input type="password" class="text" placeholder="Пароль" name="password">
+			<input type="password" class="text" placeholder="Повторите пароль" name="repeatpassword">
+			<button class="button">Зарегистрироваться</button>
+		</form>
+		<button class="button" onclick="authorithation(event)">Уже есть аккаунт? Войти</button>
+		<p>Заявка на регистрацию рассматривается в течение 3-х рабочих дней</p>
+	</div>
+</body>
+</html>

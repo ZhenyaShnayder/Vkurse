@@ -16,9 +16,7 @@
     //isset($_POST) ?
 
 	// construct SELECT person query
-	$query ="SELECT id, role, departament FROM users WHERE email = '" . $_POST['email'] . "' and password = '" . $_POST['password'] . "'";
-	//$query ="SELECT id, role, departament FROM users WHERE email = '" . '12' . "' and password = '" . '34' . "'";
-	
+	$query = "SELECT id, role, departament FROM users WHERE email = '" . $_POST['email'] . "' AND password = '" . $_POST['password'] . "';";
 	//echo "Select user query: $query" . "\n"; //*
 	
 	$result = $db->query($query); // send query
