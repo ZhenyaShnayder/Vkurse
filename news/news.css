@@ -1,68 +1,171 @@
-.outside{
-	right: 0;
-	background:#c9a78f;
-	width:  2.5%;
-	height: 1%;
-	padding: 1% 2%;
-	margin: 1%;
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border:black;
-}
-button:active {
-	background-color: #aa8469;
-}
-pre{
-	line-height: 5em;
-	font-size: 1.1rem;
+/* Общие стили */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    color: #333;
+    overflow-x: hidden;
 }
 
-.panel{
-	background-color: #aa8469; 
-	top:0;
-	display: flex;
-	width:100%;
-	left:0;
-	position: fixed;
-
-}
-figure img {
-	width: 100%;
-}
-.Name_out{
-	top: 0;
-	right:0;
-	width:50%;
-	display: flex;
-}
-a{
-	width:20%;
-}
-h1{
-	top: 0;
-	left: 0;
-	width:100%;
-}
-div.post{
-	background-color:#EEE;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	margin: 1%;
-	margin-left:10%;
-	margin-right:10%;
-	border:black;
+/* Панель заголовка */
+header.panel {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-article.post{
-	margin:0;
-	padding:0.3rem;
-	margin-top:4%;
+header.panel h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
 }
 
+/* Блок с именем пользователя и кнопками */
+.Name_out {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
-button{
-	background:#c9a78f;
+.Name_out pre {
+    font-size: 1rem;
+    margin: 0;
+    color: #333;
+}
+
+/* Кнопки */
+button.outside, a.post_for_editor {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+button.outside {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button.outside:hover {
+    background: linear-gradient(135deg, #fad0c4, #ff9a9e);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+a.post_for_editor {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+a.post_for_editor:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Посты */
+.post {
+    background: rgba(255, 255, 255, 0.9);
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 800px;
+    transition: all 0.3s ease;
+}
+
+.post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.post h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 1rem 0;
+}
+
+.post p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0.5rem 0;
+}
+
+.post .author {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 1rem;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Фоновые круги для декора */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 154, 158, 0.1);
+    border-radius: 50%;
+    z-index: -1;
+    animation: float 6s infinite ease-in-out;
+}
+
+body::before {
+    top: -50px;
+    left: -50px;
+    animation-delay: 0s;
+}
+
+body::after {
+    bottom: -50px;
+    right: -50px;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
 }
