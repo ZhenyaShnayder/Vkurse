@@ -4,7 +4,7 @@
 		exit;
 	}
 	
-	$db = new mysqli('127.0.0.1', 'root', '', 'vkurse_db'); // connect to database
+	$db = new mysqli('db', 'root', '', 'vkurse_db'); // connect to database
 	
 	if (!$db) {
 		echo "<!DOCTYPE html>

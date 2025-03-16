@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: vkurse
+    ports:
+      - "88:80"
+    volumes:
+      - ./vkurse:/var/www/html
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: mysql:8.0
+    container_name: my_site_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: vkurse_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123
+    volumes:
+      - ./db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3336:3336"
+    restart: always
+
+volumes:
+  mysql_data:

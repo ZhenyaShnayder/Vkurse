@@ -7,14 +7,15 @@
 	<title>Your post</title>
 </head>
 <body>
-	<button class="back" onclick="news(event)">⇐</button>
+	<button class="back" onclick="window.location.href='/news'">⇐</button>
 	<div class="all">
-		<form>
+		<form method = "post">
 			<input type="text" class="text" placeholder="Заголовок поста">
 			<textarea placeholder="Основной текст"></textarea>
-			<div class="buttons">
-				<button class="button">Загрузить файл</button>
-				<button class="button">Добавить опрос</button>
+			<div class="buttons" action="/post.php">
+				<button class="button" name = "file">Загрузить файл</button>
+				<button class="button" name = "interrogation">Добавить опрос</button>
+				<button class="button" name = "public">Опубликовать</button>
 			</div>
 		</form>
 	</div>
