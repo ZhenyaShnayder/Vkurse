@@ -22,6 +22,33 @@ header.panel {
     top: 0;
     z-index: 1000;
 }
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 1;
+    animation: fadeOut 3s forwards;
+    -webkit-animation: fadeOut 3s forwards; /* Для Safari и старых версий браузеров */
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
+
+@-webkit-keyframes fadeOut {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
 
 header.panel h1 {
     font-size: 2rem;

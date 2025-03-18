@@ -1,9 +1,17 @@
 <?php
+	session_start();
 	if(!isset($_COOKIE["session"])){
 		header("Location: /");
 		exit;
 	}
 	
+	if (isset($_SESSION['message'])) {
+	    $message = $_SESSION['message'];
+	    unset($_SESSION['message']);
+	} else {
+	    $message = "";
+	}
+
 	$db = new mysqli('db', 'root', 'rootpassword', 'vkurse_db'); // connect to database
 	
 	if (!$db) {
@@ -17,7 +25,6 @@
 	}
 
 	$db->set_charset("utf8"); // set charset
-	
 	$user_id = $db->query("SELECT * FROM session WHERE cookie='" . $_COOKIE["session"] . "';")->fetch_array(); 
 	
 	if ($user_id == null){
@@ -47,6 +54,11 @@
 		<title>News</title>
 	</head>
 	<body>
+		<?php if (!empty($message)): ?>
+			<div class="notification">
+			    <?= htmlspecialchars($message) ?>
+			</div>
+		<?php endif; ?>
 		<header class='panel'>
 			<h1>Vkurse</h1>
 			<div class="Name_out">
