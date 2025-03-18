@@ -50,9 +50,42 @@
 	    return $row['max_id'] + 1;
 	}
 	$id_post = generateUniquePostId($db);
-	$query = "INSERT INTO posts (id_user, title, post_text, date, vote, comments, id_post) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	
+	$vote_until = $_POST['vote_until'] ?? null;
+	if ($vote == 1 && $vote_until) {
+	    $current_date = date('Y-m-d H:i:s');
+	    $vote_until_date = date('Y-m-d H:i:s', strtotime($vote_until));
+
+	    if ($vote_until_date <= $current_date) {
+		echo "Дата окончания голосования должна быть позже текущей даты и времени.";
+		exit();
+	    }
+	} else {
+	    $vote_until = null;
+	}
+	$path = $_POST['path'] ?? null;
+	if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+	    $upload_dir = '/var/www/html/images/'; // Папка для загрузки файлов
+	    chmod($upload_dir, 0755);
+	    $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+	    $file_extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+	    if (!in_array($file_extension, $allowed_extensions)) {
+		    echo "Неподдерживаемый формат файла. Разрешены только JPG, JPEG, PNG и GIF.";
+		    exit();
+	    }
+	    $file_name = $id_post . '.' . $file_extension;
+	    $file_path = $upload_dir . $file_name;
+
+	    if (move_uploaded_file($_FILES['file']['tmp_name'], $file_path)) {
+		$path = 'images/' . $file_name;
+	    } else {
+		echo "Ошибка при загрузке файла.";
+		exit();
+	    }
+	}
+	$query = "INSERT INTO posts (id_user, title, post_text, date, vote, comments, id_post, vote_until, path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	$stmt = $db->prepare($query);
-	$stmt->bind_param("isssiii", $id_user, $title, $post_text, $date, $vote_int, $comments_int, $id_post);
+	$stmt->bind_param("isssiiiss", $id_user, $title, $post_text, $date, $vote_int, $comments_int, $id_post, $vote_until, $path);
 
 	if ($stmt->execute()) {
 		header("Location: /news/"); // redirrect

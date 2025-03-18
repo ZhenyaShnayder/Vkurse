@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="styles.css">
-	<meta charset=utf-8>
-	<script src="post.js"></script>
-	<title>Your post</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+    <script src="post.js"></script>
+    <title>Your post</title>
 </head>
 <body>
-	<button class="back" onclick="window.location.href='/news'">⇐</button>
-	<div class="all">
-		<form method = "post" action="Post.php">
-			<input type="hidden" id="vote" name="vote" value="0">
-			<input type="hidden" id="comment" name="comment" value="0">
-			<input type="text" class="text" placeholder="Заголовок поста" name="title" id="title">
-			<textarea placeholder="Основной текст" name="post_text" id="post_text"></textarea>
-			<div class="buttons">
-				<button class="button" type="button" name = "file">Загрузить файл</button>
-				<button class="button" type="button" onclick="toggleVote()" id="voteButton">Добавить голосование</button>
-				<button class="button" type="button" name = "comment" onclick="toggleComment()" id="commentButton">Добавить возможность комментирования</button>
-				<button class="button" type="submit" name = "public">Опубликовать</button>
-			</div>
-			<div id="voteMessage" style="display: none;">Возможность гололосования добавлена</div>
-			<div id="commentMessage" style="display: none;">Возможность комментирования добавлена</div>
-		</form>
-	</div>
+    <button class="back" onclick="window.location.href='/news'">⇐</button>
+    <div class="all">
+        <form method="post" action="Post.php" enctype="multipart/form-data">
+            <input type="hidden" id="vote" name="vote" value="0">
+            <input type="hidden" id="comment" name="comment" value="0">
+            <input type="text" class="text" placeholder="Заголовок поста" name="title" id="title">
+            <textarea placeholder="Основной текст" name="post_text" id="post_text"></textarea>
+            <div class="buttons">
+                <button class="button" type="button" name="file" onclick="document.getElementById('file').click()">Загрузить файл</button>
+                <input type="file" name="file" id="file" accept="image/*" style="display: none;">
+                <button class="button" type="button" onclick="toggleVote()" id="voteButton">Добавить голосование</button>
+                <button class="button" type="button" name="comment" onclick="toggleComment()" id="commentButton">Добавить возможность комментирования</button>
+                <button class="button" type="submit" name="public">Опубликовать</button>
+            </div>
+            <div id="voteMessage" style="display: none;">
+                <label for="vote_until">Дата окончания голосования:</label>
+                <input type="datetime-local" id="vote_until" name="vote_until" min="<?= date('Y-m-d\TH:i') ?>">
+            </div>
+            <div id="commentMessage" style="display: none;">Возможность комментирования добавлена</div>
+            <div id="fileNameDisplay" style="display: none;">Выбран файл: <span id="fileName"></span></div>
+        </form>
+    </div>
 </body>
 </html>
