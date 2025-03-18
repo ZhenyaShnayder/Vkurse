@@ -36,15 +36,3 @@ function toggleComment(){
 	}
 }
 
-document.getElementById('file').addEventListener('change', function() {
-    const fileName = this.files[0]?.name || 'Файл не выбран';
-    const fileNameDisplay = document.getElementById('fileNameDisplay');
-    const fileNameSpan = document.getElementById('fileName');
-
-    if (fileName !== 'Файл не выбран') {
-        fileNameSpan.textContent = fileName;
-        fileNameDisplay.style.display = 'block';
-    } else {
-        fileNameDisplay.style.display = 'none';
-    }
-});
