@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<link rel="stylesheet" href="styles.css">
-	<script src="reg.js"></script>
 	<meta charset=utf-8>
 	<title>Registration</title>
 </head>
+
 <body>
 	<div>
 		<h1>Регистрация</h1>
-		<form method="POST"> 
-			<input type="text" class="text" placeholder="Имя" name="name">
-			<input type="text" class="text" placeholder="Фамилия" name="last_name">
-			<input type="text" class="text" placeholder="Отчество" name="middle_name">
-			<input type="text" class="text" placeholder="Корпоративная почта" name="email">
-			<input type="password" class="text" placeholder="Пароль" name="password">
-			<input type="password" class="text" placeholder="Повторите пароль" name="repeatpassword">
-			<button class="button">Зарегистрироваться</button>
+		<form id="registrationForm" action="/Registration/reg.php">
+			<input class="text" type="text" id="first_name" name="first_name" placeholder="Имя">
+			<span class="error" id="first_name_error"></span>
+			<input class="text" type="text" id="middle_name" name="middle_name" placeholder="Отчество">
+			<span class="error" id="middle_name_error"></span>
+			<input class="text" type="text" id="last_name" name="last_name" placeholder="Фамилия">
+			<span class="error" id="last_name_error"></span>
+			<input class="text" type="email" id="email" name="email" placeholder="Корпоративная почта">
+			<span class="error" id="email_error"></span>
+			<input class="text" type="password" id="password" placeholder="Пароль" name="password"
+				autocomplete="new-password">
+			<span class="error" id="password_error"></span>
+			<input class="text" type="password" id="repeat_password" name="repeat_password"
+				placeholder="Повторите пароль">
+			<span class="error" id="repeat_password_error"></span>
+			<button class="button" type="submit">Зарегистрироваться</button>
 		</form>
 		<button class="button" onclick="authorithation(event)">Уже есть аккаунт? Войти</button>
-		<p>Заявка на регистрацию рассматривается в течение 3-х рабочих дней</p>
 	</div>
+	<script src="reg.js"></script>
 </body>
+
 </html>
